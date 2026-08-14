@@ -1,0 +1,63 @@
+#include<iostream>
+using namespace std;
+struct node{
+    int data;
+    struct node*next;
+};
+
+node *head=NULL;
+void insertatbeginning(int val){
+    node *newnode= new node();
+    newnode->data=val;
+    
+    newnode->next=head;
+    head=newnode;
+}
+
+void insertatend(int val){
+    node *newnode =new node();
+    newnode->data=val;
+    node *temp=head;
+    if(head==NULL){head=newnode;}
+    while(temp->next!=NULL){
+        temp=temp->next;
+     
+    }
+    temp->next=newnode;
+    newnode->next=NULL;
+}
+
+void insertatpos(int val,int pos){
+    node *newnode=new node();
+    newnode->data=val;
+    node *temp=head;
+    if(head==NULL){cout<<"invalid entry! \n";}
+    if(pos==1){insertatbeginning(val);}
+    for(int i=1;i<pos-1 && temp!=NULL;i++){
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+    temp=newnode;
+}
+
+void traverse(){
+    node *temp=head;
+    while(temp!=NULL){
+        cout<<temp->data<<endl;
+        temp=temp->next;
+    }
+}
+
+int main(){
+    struct node s;
+    
+    insertatbeginning(10);
+    insertatbeginning(20);
+    insertatbeginning(30);
+    insertatbeginning(40);
+    insertatend(70);
+    insertatpos(60,4);
+
+    traverse();
+}
